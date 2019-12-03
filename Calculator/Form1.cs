@@ -12,9 +12,9 @@ namespace Calculator
 {
     public partial class Form1 : Form
     {
-        double oneNum, twoNum, ansNun = 0;
+        double oneNum, twoNum;
         string Operator = "";
-        bool isNewNum= true;
+        bool isNewNum = true;
 
         public Form1()
         {
@@ -23,7 +23,7 @@ namespace Calculator
 
         private void operator_Click(object sender, EventArgs e)
         {
-            if (Operator != "")
+            if (Operator != "" && !isNewNum)
             {
                 twoNum = double.Parse(textBox1.Text);
                 Pro();
@@ -52,7 +52,8 @@ namespace Calculator
         {
             if (Operator != "")
             {
-                twoNum = double.Parse(textBox1.Text);
+                if (!isNewNum)
+                    twoNum = double.Parse(textBox1.Text);
                 Pro();
             }
             isNewNum = true;
@@ -63,7 +64,6 @@ namespace Calculator
             textBox1.Text = "";
             oneNum = 0;
             twoNum = 0;
-            ansNun = 0;
             Operator = "";
         }
 
@@ -80,19 +80,19 @@ namespace Calculator
             switch (Operator)
             {
                 case "+":
-                    ansNun = oneNum + twoNum;
+                    oneNum += twoNum;
                     break;
                 case "-":
-                    ansNun = oneNum - twoNum;
+                    oneNum -= twoNum;
                     break;
                 case "*":
-                    ansNun = oneNum * twoNum;
+                    oneNum *= twoNum;
                     break;
                 case "/":
-                    ansNun = oneNum / twoNum;
+                    oneNum /= twoNum;
                     break;
             }
-            textBox1.Text = ansNun.ToString();
+            textBox1.Text = oneNum.ToString();
         }
     }
 }
